@@ -55,7 +55,7 @@ my @variations = ("default", "rga_spring2018", "rga_fall2018", "rgb_spring2019",
 
 my @runs = clas12_runs(@variations);
 
-my @custom_variations = ("pbtest", "ND3", "hdice", "longitudinal", "transverse", "APOLLOnd3");
+my @custom_variations = ("pbtest", "ND3", "hdice", "longitudinal", "transverse", "APOLLOnd3", "RGM_lAr", "RGM_2_C_v2_S", "RGM_2_C_v2_L");
 
 # list of original variations:
 # lH2, lD2, lHe, ND3, PolTarg, APOLLOnh3, APOLLOnd3, lH2e,
@@ -99,7 +99,7 @@ require "gxml_to_sqlite.pl";
 foreach my $variation ("default") {
     $configuration{"run_number"} = clas12_run($variation);
     process_gxml("cad/cad_$variation.gxml", "experiments/clas12/targets/cad");
-    process_gxml("cad_rgm/cad_$variation.gxml", "experiments/clas12/targets/cad_rgm");
+    # process_gxml("cad_rgm/cad_$variation.gxml", "experiments/clas12/targets/cad_rgm");
 }
 
 

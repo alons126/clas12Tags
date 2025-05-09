@@ -7,7 +7,7 @@ require Exporter;
 my %custom_variations = map {$_ => 1} (
     "pbtest", "ND3", "hdice", "longitudinal", "transverse", "ddvcs",
     "rghFTOut", "rghFTOn", "TransverseUpstreamBeampipe",
-    "michel_9mmcopper"
+    "michel_9mmcopper", "RGM_lAr", "RGM_2_C_v2_S", "RGM_2_C_v2_L"
 );
 
 # New mapping: variation => arrayref of runs

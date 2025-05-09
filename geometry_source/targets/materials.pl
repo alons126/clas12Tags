@@ -20,6 +20,10 @@ sub build_materials {
     elsif ($configuration_string eq "transverse") {
         build_transverse_mats();
     }
+    elsif ($configuration_string eq "RGM_lAr") {
+        build_lAr_mats();
+    }
+
 
     # common to all
 

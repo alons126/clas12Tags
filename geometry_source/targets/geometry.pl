@@ -19,6 +19,7 @@ require "./liquid_standards.pl";
 require "./bonus.pl";
 require "./rgm.pl";
 require "./apollo.pl"; # rgc
+require "./RGM_lAr.pl";
 
 sub load_target_parameters {
     $target_zpos = $parameters{"target_zpos"};
@@ -67,7 +68,10 @@ sub build_target {
         or $configuration_string eq "rgm_fall2021_Cx4"
         or $configuration_string eq "rgm_fall2021_Ca"
         or $configuration_string eq "rgm_fall2021_Sn"
-        or $configuration_string eq "rgm_fall2021_Snx4") {
+        or $configuration_string eq "rgm_fall2021_Snx4"
+        or $configuration_string eq "RGM_lAr"
+        or $configuration_string eq "RGM_2_C_v2_S"
+        or $configuration_string eq "RGM_2_C_v2_L") {
         build_rgm_targets();
     }
     else {
