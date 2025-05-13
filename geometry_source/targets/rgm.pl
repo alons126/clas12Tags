@@ -1733,14 +1733,14 @@ sub build_new_rgm_targets {
 
     # actual target
     %detector = init_det();
-    if($configuration_string eq "RGM_lAr") {
+    if ($configuration_string eq "RGM_lAr") {
         $detector{"name"} = "lAr_target_cell";
     } elsif ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L") {
         $detector{"name"} = "Empty_target";
     }
     $detector{"mother"} = "target";
     $detector{"description"} = "Target Cell";
-    if($configuration_string eq "RGM_lAr") {
+    if ($configuration_string eq "RGM_lAr") {
         $detector{"color"} = "aa0000";
     } elsif ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L") {
         $detector{"color"} = "d9d9d9";
@@ -1760,57 +1760,54 @@ sub build_new_rgm_targets {
     print_det(\%configuration, \%detector);
 
 
-    # upstream al window. zpos comes from engineering model, has the shift of 1273.27 mm + 30 due to the new engineering center
-    # where is the value of 1273.27 mm comes from?
-    # my $eng_shift = 1303.27 - 30;
+    # upstream al window. zpos comes from engineering model, has the shift of 1273.27 mm +  30 mm due to the new engineering center
     my $eng_shift = 1303.27; # original
-    my $radius = 3; # From Bob (Entrance window diameter is 6 mm)
-    my $thickness = 0.015; # From Bob (Entrance window thickness is 30 microns)
-    # my $zpos = $eng_shift - 1330.77 + 2*$thickness; # From BM2101-02-00-0000 (8).pdf
-    my $zpos = $eng_shift - 1330.77 + $thickness; # From BM2101-02-00-0000 (8).pdf
+    my $al_window_entrance_radius = 3; # From Bob (Entrance window diameter is 6 mm)
+    my $al_window_entrance_thickness = 0.015; # From Bob (Entrance window thickness is 30 microns)
+    my $zpos = $eng_shift - (1330.77 - $al_window_entrance_thickness); # From BM2101-02-00-0000 (8).pdf
     %detector = init_det();
     $detector{"name"} = "al_window_entrance";
     $detector{"mother"} = "target";
     $detector{"description"} = "30 mm thick aluminum window upstream";
     $detector{"color"} = "aaaaff";
     $detector{"type"} = "Tube";
-    $detector{"dimensions"} = "0*mm $radius*mm $thickness*mm 0*deg 360*deg";
+    $detector{"dimensions"} = "0*mm $al_window_entrance_radius*mm $al_window_entrance_thickness*mm 0*deg 360*deg";
     $detector{"pos"} = "0*mm 0*mm $zpos*mm";
     $detector{"material"} = "G4_Al";
     $detector{"style"} = "1";
     print_det(\%configuration, \%detector);
 
-    # TODO: remove lines
-    print("\n\nz pos al_window_entrance:                     \t\t$zpos [mm]\n");
-    print("-((z pos al_window_entrance)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
-    print("-((z pos al_window_entrance)-eng_shift-thickness):\t\t" . (-($zpos-$eng_shift-$thickness)) . " [mm]\n");
-    # print("z pos al_window_entrance:\t\t" . ($zpos/10) . " [cm]\n");
-    # print("z pos al_window_entrance-thickness:\t" . (($zpos-$thickness)/10) . " [cm]\n");
-    print("\n");
+    # # TODO: remove lines
+    # print("\n\nz pos al_window_entrance:                     \t\t$zpos [mm]\n");
+    # print("-((z pos al_window_entrance)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
+    # print("-((z pos al_window_entrance)-eng_shift-al_window_entrance_thickness):\t\t" . (-($zpos-$eng_shift-$al_window_entrance_thickness)) . " [mm]\n");
+    # # print("z pos al_window_entrance:\t\t" . ($zpos/10) . " [cm]\n");
+    # # print("z pos al_window_entrance-al_window_entrance_thickness:\t" . (($zpos-$al_window_entrance_thickness)/10) . " [cm]\n");
+    # print("\n");
 
     # downstream al window
-    $radius = 7.5; # From Bob (Exit window diameter is 15 mm)
-    $thickness = 0.015; # From Bob (Exit window thickness is 30 microns)
-    $zpos = $eng_shift - 1325.77 - $thickness; # From BM2101-02-00-0000 (8).pdf
+    $al_window_exit_radius = 7.5; # From Bob (Exit window diameter is 15 mm)
+    $al_window_exit_thickness = 0.015; # From Bob (Exit window al_window_exit_thickness is 30 microns)
+    $zpos = $eng_shift - (1325.77 + $al_window_exit_thickness); # From BM2101-02-00-0000 (8).pdf
     %detector = init_det();
     $detector{"name"} = "al_window_exit";
     $detector{"mother"} = "target";
     $detector{"description"} = "30 mm thick aluminum window downstream";
     $detector{"color"} = "aaaaff";
     $detector{"type"} = "Tube";
-    $detector{"dimensions"} = "0*mm $radius*mm $thickness*mm 0*deg 360*deg";
+    $detector{"dimensions"} = "0*mm $al_window_exit_radius*mm $al_window_exit_thickness*mm 0*deg 360*deg";
     $detector{"pos"} = "0*mm 0*mm $zpos*mm";
     $detector{"material"} = "G4_Al";
     $detector{"style"} = "1";
     print_det(\%configuration, \%detector);
 
-    # TODO: remove lines
-    print("\n\nz pos al_window_exit:                     \t\t$zpos [mm]\n");
-    print("-((z pos al_window_exit)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
-    print("-((z pos al_window_exit)-eng_shift+thickness):\t\t" . (-($zpos-$eng_shift+$thickness)) . " [mm]\n");
-    # print("z pos al_window_exit:\t\t" . ($zpos/10) . " [cm]\n");
-    # print("z pos al_window_exit-thickness:\t" . (($zpos-$thickness)/10) . " [cm]\n");
-    print("\n");
+    # # TODO: remove lines
+    # print("\n\nz pos al_window_exit:                     \t\t$zpos [mm]\n");
+    # print("-((z pos al_window_exit)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
+    # print("-((z pos al_window_exit)-eng_shift+al_window_exit_thickness):\t\t" . (-($zpos-$eng_shift+$al_window_exit_thickness)) . " [mm]\n");
+    # # print("z pos al_window_exit:\t\t" . ($zpos/10) . " [cm]\n");
+    # # print("z pos al_window_exit-al_window_exit_thickness:\t" . (($zpos-$al_window_exit_thickness)/10) . " [cm]\n");
+    # print("\n");
 
     # # cell barrier is 15 microns
     # $zpos = $eng_shift - 1248.27;
