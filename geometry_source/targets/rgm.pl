@@ -1723,14 +1723,13 @@ sub build_new_rgm_targets {
     print_det(\%configuration, \%detector);
 
     # lAr cell
-    $nplanes = 2;
-    my @oradiusT = (3, 7.5);
-    my @z_planeT = (-27.47, -22.53);
-    # my @z_planeT = (-4.97, 0);
-    # my @oradiusT = (3, 7.5, 7.3, 5.0, 2.5); # Review 1
-    # my @z_planeT = (-5.015, 0, 22.5, 23.5, 24.5); # Review 1
-    # my @oradiusT = (2.5, 10.3, 7.3, 5.0, 2.5); # original
-    # my @z_planeT = (-24.2, -21.2, 22.5, 23.5, 24.5); # original
+    $nplanes = 5;
+    my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5); # With 0.1 mm spacing between the lAr and the windows
+    my @z_planeT = (-27.37, -25.47, -25.0, -23.5, -22.63); # With 0.1 mm spacing between the lAr and the windows
+    # my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5); # Without spacing between the lAr and the windows
+    # my @z_planeT = (-27.47, -25.47, -25.0, -23.5, -22.53); # Without spacing between the lAr and the windows
+    # my @oradiusT = (3, 7.5); # Before updating into clas12Tags
+    # my @z_planeT = (-27.47, -22.53); # Before updating into clas12Tags
 
     # actual target
     %detector = init_det();
@@ -1767,6 +1766,7 @@ sub build_new_rgm_targets {
     my $eng_shift = 1303.27; # original
     my $radius = 3; # From Bob (Entrance window diameter is 6 mm)
     my $thickness = 0.015; # From Bob (Entrance window thickness is 30 microns)
+    # my $zpos = $eng_shift - 1330.77 + 2*$thickness; # From BM2101-02-00-0000 (8).pdf
     my $zpos = $eng_shift - 1330.77 + $thickness; # From BM2101-02-00-0000 (8).pdf
     %detector = init_det();
     $detector{"name"} = "al_window_entrance";
@@ -1781,9 +1781,12 @@ sub build_new_rgm_targets {
     print_det(\%configuration, \%detector);
 
     # TODO: remove lines
-    # # print("\n\nz pos al_window_entrance:\t$zpos [mm]\n");
-    # print("\n\nz pos al_window_entrance:\t\t" . ($zpos/10) . " [cm]\n");
+    print("\n\nz pos al_window_entrance:                     \t\t$zpos [mm]\n");
+    print("-((z pos al_window_entrance)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
+    print("-((z pos al_window_entrance)-eng_shift-thickness):\t\t" . (-($zpos-$eng_shift-$thickness)) . " [mm]\n");
+    # print("z pos al_window_entrance:\t\t" . ($zpos/10) . " [cm]\n");
     # print("z pos al_window_entrance-thickness:\t" . (($zpos-$thickness)/10) . " [cm]\n");
+    print("\n");
 
     # downstream al window
     $radius = 7.5; # From Bob (Exit window diameter is 15 mm)
@@ -1802,8 +1805,12 @@ sub build_new_rgm_targets {
     print_det(\%configuration, \%detector);
 
     # TODO: remove lines
-    # print("z pos al_window_exit:\t\t\t" . ($zpos/10) . " [cm]\n");
-    # print("z pos al_window_exit+thickness:\t\t" . (($zpos+$thickness)/10) . " [cm]\n\n");
+    print("\n\nz pos al_window_exit:                     \t\t$zpos [mm]\n");
+    print("-((z pos al_window_exit)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
+    print("-((z pos al_window_exit)-eng_shift+thickness):\t\t" . (-($zpos-$eng_shift+$thickness)) . " [mm]\n");
+    # print("z pos al_window_exit:\t\t" . ($zpos/10) . " [cm]\n");
+    # print("z pos al_window_exit-thickness:\t" . (($zpos-$thickness)/10) . " [cm]\n");
+    print("\n");
 
     # # cell barrier is 15 microns
     # $zpos = $eng_shift - 1248.27;

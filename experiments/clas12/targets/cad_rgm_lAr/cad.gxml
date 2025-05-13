@@ -9,9 +9,6 @@
 
 <gxml>
 
-	<!-- cell exit and tooling -->
-    <!-- <volume name="CellExitAndTooling"           mother="target" color="d0d0d0" position="0*mm 0*mm 0*mm" rotation="0*deg 90*deg 0*deg" material="G4_Al"/> -->
-
 	<!-- entry window -->
     <volume name="EntryWindow3"           mother="target" color="d0d0d0" position="0*mm 0*mm 0*mm" rotation="0*deg 90*deg 0*deg" material="G4_Al"/>
     <!-- <volume name="EntryWindow"           mother="target" color="d0d0d0" position="0*mm 0*mm 0*mm" rotation="0*deg 90*deg 0*deg" material="G4_Al"/> -->
