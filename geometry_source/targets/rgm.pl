@@ -1457,6 +1457,12 @@ sub build_new_rgm_targets {
     my ($separation, $offset_x, $offset_y, $offset_z, $row_pole, $row_target, $row_flag, $sT_x2, $Sn_p_y);
     my ($C_p_x, $C_p_y, $Sn_t_x, $Sn_t_y, $C_t_x, $C_t_y, $Sn_f_x, $Sn_f_y, $C_f_x, $C_f_y);
 
+    # In the following, we set the dimensions ans positions positions foil target setup based on the blueprints of the system.
+    # Here:
+    #       - Small foils: the same dimensions as the previous implementation (RGM_2_C)
+    #       - Large foils: dimensions are from the blueprints of the system, with the exception of the effective width. 
+    #                      The effective width is the width that a rectangular box would need to have—given the same thickness and height as the actual foil target—so that its total volume equals that of the irregularly shaped (octagonal) foil.
+
     if ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L")
     {
         #Flag Pole Geometry (cm/deg)
@@ -1491,8 +1497,9 @@ sub build_new_rgm_targets {
             @C_target = (0.243912, 0.455, 0.1, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         }
 
-        # TODO: change separation with the larger foils?
-        $separation = 0.127; #Distance the flags set the target above the end of the flag poles.
+        # separation = distance the flags set the target above the end of the flag poles.
+        # This distance is kept the same for small and large foils.
+        $separation = 0.127; 
 
         @flag_pole_relpos = (0.381, 1.25, 1.25, 1.25); #Distance from end of flag_shaft to center of flag_pole 1, center of flag_pole 1 to center of flag_pole 2, center of flag_pole 2 to center of flag_pole 3, and center of flag_pole 3 to center of flag_pole 4
         @row = ($flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2] - $flag_pole_relpos[3], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1], $flag_shaft[2] - $flag_pole_relpos[0]); #Positions of rows of the flag_poles.
@@ -1683,17 +1690,6 @@ sub build_new_rgm_targets {
     print_det(\%configuration, \%detector);
 
     #Carbon foil target
-    # $detector{"name"} = "Carbon_foil_target";
-    # $detector{"mother"} = "target";
-    # $detector{"description"} = "RGM Solid Target C Octagon";
-    # $detector{"pos"} = "$C_t_x*cm $C_t_y*cm $row_target*cm";
-    # $detector{"rotation"} = "$C_target[3]*deg $C_target[4]*deg $C_target[5]*deg";
-    # $detector{"color"} = "FF9300";
-    # $detector{"type"} = "Polyhedra";
-    # $detector{"dimensions"} = "0 360 8 $C_target[1]*cm -$C_target[2]*cm $C_target[2]*cm";
-    # $detector{"material"} = "G4_C";
-    # $detector{"style"} = 1;
-    # print_det(\%configuration, \%detector);
     $detector{"name"} = "Carbon_foil_target";
     $detector{"mother"} = "target";
     $detector{"description"} = "RGM Solid Target C";
@@ -1724,11 +1720,11 @@ sub build_new_rgm_targets {
 
     # lAr cell
     $nplanes = 5;
-    my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5); # With 0.1 mm spacing between the lAr and the windows
+    my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5);             # With 0.1 mm spacing between the lAr and the windows
     my @z_planeT = (-27.37, -25.47, -25.0, -23.5, -22.63); # With 0.1 mm spacing between the lAr and the windows
-    # my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5); # Without spacing between the lAr and the windows
+    # my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5);             # Without spacing between the lAr and the windows
     # my @z_planeT = (-27.47, -25.47, -25.0, -23.5, -22.53); # Without spacing between the lAr and the windows
-    # my @oradiusT = (3, 7.5); # Before updating into clas12Tags
+    # my @oradiusT = (3, 7.5);         # Before updating into clas12Tags
     # my @z_planeT = (-27.47, -22.53); # Before updating into clas12Tags
 
     # actual target
@@ -1751,14 +1747,13 @@ sub build_new_rgm_targets {
     for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $oradiusT[$i]*mm";}
     for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $z_planeT[$i]*mm";}
     $detector{"dimensions"} = $dimen;
-    if($configuration_string eq "RGM_lAr") {
+    if ($configuration_string eq "RGM_lAr") {
         $detector{"material"} = "lAr_target";
     } elsif ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L") {
         $detector{"material"} = "G4_Galactic";
     }
     $detector{"style"} = 1;
     print_det(\%configuration, \%detector);
-
 
     # upstream al window. zpos comes from engineering model, has the shift of 1273.27 mm +  30 mm due to the new engineering center
     my $eng_shift = 1303.27; # original
@@ -1824,7 +1819,6 @@ sub build_new_rgm_targets {
     # $detector{"material"} = "G4_Al";
     # $detector{"style"} = "1";
     # print_det(\%configuration, \%detector);
-
 
     # scattering chambers al window, 75 microns
     # note: the eng. position is 1017.27 - here it is placed 8mm upstream to place it within the mother scattering chamber
