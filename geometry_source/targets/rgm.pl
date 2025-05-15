@@ -1756,7 +1756,8 @@ sub build_new_rgm_targets {
     for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $z_planeT[$i]*mm";}
     $detector{"dimensions"} = $dimen;
     if ($configuration_string eq "rgm_fall2021_Ar") {
-        $detector{"material"} = "lAr_target";
+        $detector{"material"} = "G4_Ar";
+        # $detector{"material"} = "lAr_target";
     } elsif ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L") {
         $detector{"material"} = "G4_Galactic";
     }
@@ -1767,7 +1768,7 @@ sub build_new_rgm_targets {
     my $eng_shift = 1303.27; # original
     my $al_window_entrance_radius = 2.95; # From Bob (Entrance window diameter is 6 mm) - used smaller radius to 2.95 mm to approximate the window as flat and avoid overlap with the base tube, similar to the lD2 target
     my $al_window_entrance_thickness = 0.015; # From Bob (Entrance window thickness is 30 microns)
-    my $zpos = $eng_shift - (1330.77 - $al_window_entrance_thickness); # From BM2101-02-00-0000 (8).pdf
+    my $zpos = $eng_shift - 1330.77 + $al_window_entrance_thickness; # From BM2101-02-00-0000 (8).pdf
     %detector = init_det();
     $detector{"name"} = "al_window_entrance";
     $detector{"mother"} = "target";
@@ -1791,7 +1792,7 @@ sub build_new_rgm_targets {
     # Downstream Al window
     $al_window_exit_radius = 5; # From Bob (Exit window diameter is 15 mm) - used smaller radius to 5 mm to approximate the window as flat, similar to the lD2 target
     $al_window_exit_thickness = 0.015; # From Bob (Exit window al_window_exit_thickness is 30 microns)
-    $zpos = $eng_shift - (1325.77 + $al_window_exit_thickness); # From BM2101-02-00-0000 (8).pdf
+    $zpos = $eng_shift - 1325.77 - $al_window_exit_thickness; # From BM2101-02-00-0000 (8).pdf
     %detector = init_det();
     $detector{"name"} = "al_window_exit";
     $detector{"mother"} = "target";
@@ -1811,22 +1812,6 @@ sub build_new_rgm_targets {
     # # print("z pos al_window_exit:\t\t" . ($zpos/10) . " [cm]\n");
     # # print("z pos al_window_exit-al_window_exit_thickness:\t" . (($zpos-$al_window_exit_thickness)/10) . " [cm]\n");
     # print("\n");
-
-    # # cell barrier is 15 microns
-    # $zpos = $eng_shift - 1248.27;
-    # $radius = 5;
-    # $thickness = 0.0075;
-    # %detector = init_det();
-    # $detector{"name"} = "al_window_mli_barrier";
-    # $detector{"mother"} = "target";
-    # $detector{"description"} = "15 mm thick aluminum mli barrier";
-    # $detector{"color"} = "bb99aa";
-    # $detector{"type"} = "Tube";
-    # $detector{"dimensions"} = "0*mm $radius*mm $thickness*mm 0*deg 360*deg";
-    # $detector{"pos"} = "0*mm 0*mm $zpos*mm";
-    # $detector{"material"} = "G4_Al";
-    # $detector{"style"} = "1";
-    # print_det(\%configuration, \%detector);
 
     # Scattering chambers al window, 75 microns
     # Note: the eng. position is 1017.27 - here it is placed 8mm upstream to place it within the mother scattering chamber
