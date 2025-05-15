@@ -19,7 +19,7 @@ require "./liquid_standards.pl";
 require "./bonus.pl";
 require "./rgm.pl";
 require "./apollo.pl"; # rgc
-require "./RGM_lAr.pl";
+require "./new_rgm_targets.pl";
 
 sub load_target_parameters {
     $target_zpos = $parameters{"target_zpos"};

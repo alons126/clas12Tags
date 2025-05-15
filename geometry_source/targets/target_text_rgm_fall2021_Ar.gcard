@@ -4,20 +4,20 @@
 	<!-- <option name="geometry" value="1400x1200"/> -->
 
     <!-- The new lAr RGM target -->
-	<!-- <detector name="target" factory="TEXT" variation="rgm_fall2021_Ar"/> -->
-	<!-- <detector name="experiments/clas12/targets/cad_rgm_new/" factory="CAD"/> -->
+	<detector name="target" factory="TEXT" variation="rgm_fall2021_Ar"/>
+	<detector name="cad_rgm_new/" factory="CAD"/>
 
     <!-- The new small C RGM target -->
-	<!-- <detector name="target" factory="TEXT" variation="rgm_fall2021_C_v2_S"/> -->
-	<!-- <detector name="experiments/clas12/targets/cad_rgm_new/" factory="CAD"/> -->
+	<!-- <detector name="target" factory="TEXT" variation="rgm_fall2021_C_v2_S"/>
+	<detector name="cad_rgm_new/" factory="CAD"/> -->
 
     <!-- The new large C RGM target -->
-	<detector name="target" factory="TEXT" variation="rgm_fall2021_C_v2_L"/>
-	<detector name="experiments/clas12/targets/cad_rgm_new/" factory="CAD"/>
+	<!-- <detector name="target" factory="TEXT" variation="rgm_fall2021_C_v2_L"/>
+	<detector name="cad_rgm_new/" factory="CAD"/> -->
 
     <!-- RGM lD2 target -->
 	<!-- <detector name="target" factory="TEXT" variation="rgb_fall2019"/>
-	<detector name="experiments/clas12/targets/cad/" factory="CAD"/> -->
+	<detector name="cad/" factory="CAD"/> -->
 
 	<option name="BEAM_P" value="proton, 1.0*GeV, 90*deg, 10*deg"/>
 	<option name="SPREAD_P" value="0.0*GeV, 80*deg, 180*deg"/>

@@ -51,7 +51,8 @@ sub create_system {
 }
 
 my @variations = ("default", "rga_spring2018", "rga_fall2018", "rgb_spring2019", "rga_spring2019", "rgb_fall2019", "rgf_spring2020",
-    "rgm_fall2021_He", "rgm_fall2021_C", "rgm_fall2021_Sn",  "rgm_fall2021_Cx4", "rgm_fall2021_Snx4", "rgm_fall2021_Ca", "rgc_summer2022");
+    "rgm_fall2021_He", "rgm_fall2021_C", "rgm_fall2021_Sn",  "rgm_fall2021_Cx4", "rgm_fall2021_Snx4", "rgm_fall2021_Ca", "rgc_summer2022",
+    "rgm_fall2021_Ar", "rgm_fall2021_C_v2_S", "rgm_fall2021_C_v2_L",);
 
 my @runs = clas12_runs(@variations);
 
@@ -99,7 +100,7 @@ require "gxml_to_sqlite.pl";
 foreach my $variation ("default") {
     $configuration{"run_number"} = clas12_run($variation);
     process_gxml("cad/cad_$variation.gxml", "experiments/clas12/targets/cad");
-    # process_gxml("cad_rgm/cad_$variation.gxml", "experiments/clas12/targets/cad_rgm");
+    process_gxml("cad_rgm/cad_$variation.gxml", "experiments/clas12/targets/cad_rgm");
 }
 
 

@@ -1609,9 +1609,8 @@ sub build_new_rgm_targets {
         $C_f_y = -0.352286 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
     }
 
+    # Mother Volume (parameters from RGM_2_C, RGM_2_Sn)
     my $nplanes = 4;
-
-    # Target container parameters from RGM_2_C, RGM_2_Sn:
     my @oradius = (50.2, 50.2, 21.0, 21.0);
     my @z_plane = (-115.0, 265.0, 290.0, 300.0);
 
@@ -1766,7 +1765,7 @@ sub build_new_rgm_targets {
 
     # Upstream Al window. zpos comes from engineering model, has the shift of 1273.27 mm +  30 mm due to the new engineering center
     my $eng_shift = 1303.27; # original
-    my $al_window_entrance_radius = 3; # From Bob (Entrance window diameter is 6 mm)
+    my $al_window_entrance_radius = 2.95; # From Bob (Entrance window diameter is 6 mm) - used smaller radius to 2.95 mm to approximate the window as flat and avoid overlap with the base tube, similar to the lD2 target
     my $al_window_entrance_thickness = 0.015; # From Bob (Entrance window thickness is 30 microns)
     my $zpos = $eng_shift - (1330.77 - $al_window_entrance_thickness); # From BM2101-02-00-0000 (8).pdf
     %detector = init_det();
@@ -1790,7 +1789,7 @@ sub build_new_rgm_targets {
     # print("\n");
 
     # Downstream Al window
-    $al_window_exit_radius = 7.5; # From Bob (Exit window diameter is 15 mm)
+    $al_window_exit_radius = 5; # From Bob (Exit window diameter is 15 mm) - used smaller radius to 5 mm to approximate the window as flat, similar to the lD2 target
     $al_window_exit_thickness = 0.015; # From Bob (Exit window al_window_exit_thickness is 30 microns)
     $zpos = $eng_shift - (1325.77 + $al_window_exit_thickness); # From BM2101-02-00-0000 (8).pdf
     %detector = init_det();
