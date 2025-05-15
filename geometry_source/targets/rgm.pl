@@ -1756,8 +1756,7 @@ sub build_new_rgm_targets {
     for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $z_planeT[$i]*mm";}
     $detector{"dimensions"} = $dimen;
     if ($configuration_string eq "rgm_fall2021_Ar") {
-        $detector{"material"} = "G4_Ar";
-        # $detector{"material"} = "lAr_target";
+        $detector{"material"} = "lAr_target"; # Custom material definition for liquid argon
     } elsif ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L") {
         $detector{"material"} = "G4_Galactic";
     }
