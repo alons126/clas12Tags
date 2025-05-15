@@ -1470,13 +1470,13 @@ sub build_new_rgm_targets {
     #       - Large foils: dimensions are from the blueprints of the system, with the exception of the effective width. 
     #                      The effective width is the width that a rectangular box would need to have—given the same thickness and height as the actual foil target—so that its total volume equals that of the irregularly shaped (octagonal) foil.
 
-    if ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L")
+    if ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L")
     {
         # Flag Pole Geometry (cm/deg)
         @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 55, 0); #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
         @C_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 0, 0);   #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the C flag poles.
 
-        if ($configuration_string eq "RGM_2_C_v2_S") {
+        if ($configuration_string eq "rgm_fall2021_C_v2_S") {
             # Flag Geometry (cm)
             # Half x = width -> same as sketch (0.334/2 cm)
             # Half y = hight -> same as sketch ((0.127+0.254)/2=0.381/2 cm)
@@ -1489,7 +1489,7 @@ sub build_new_rgm_targets {
             # Half z = thickness -> same as analysis note (0.1 cm)
             @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
             @C_target = (0.1685, 0.405, 0.1, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
-        } elsif ($configuration_string eq "RGM_2_C_v2_L") {
+        } elsif ($configuration_string eq "rgm_fall2021_C_v2_L") {
             # Flag Geometry (cm)
             # Half x = width -> same as sketch (0.334/2 cm)
             # Half y = hight -> same as sketch ((0.127+0.254)/2=0.381/2 cm)
@@ -1549,7 +1549,7 @@ sub build_new_rgm_targets {
         $C_f_x = 0.0 + $offset_x;
         $C_f_y = (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
 
-    } elsif ($configuration_string eq "RGM_lAr") {
+    } elsif ($configuration_string eq "rgm_fall2021_Ar") {
         
         # Flag Pole Geometry (cm/deg)
         @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 30, 0); #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
@@ -1738,16 +1738,16 @@ sub build_new_rgm_targets {
 
     # Actual lAr target
     %detector = init_det();
-    if ($configuration_string eq "RGM_lAr") {
+    if ($configuration_string eq "rgm_fall2021_Ar") {
         $detector{"name"} = "lAr_target_cell";
-    } elsif ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L") {
+    } elsif ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L") {
         $detector{"name"} = "Empty_target";
     }
     $detector{"mother"} = "target";
     $detector{"description"} = "Target Cell";
-    if ($configuration_string eq "RGM_lAr") {
+    if ($configuration_string eq "rgm_fall2021_Ar") {
         $detector{"color"} = "aa0000";
-    } elsif ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L") {
+    } elsif ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L") {
         $detector{"color"} = "d9d9d9";
     }
     $detector{"type"} = "Polycone";
@@ -1756,9 +1756,9 @@ sub build_new_rgm_targets {
     for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $oradiusT[$i]*mm";}
     for (my $i = 0; $i < $nplanes; $i++) {$dimen = $dimen . " $z_planeT[$i]*mm";}
     $detector{"dimensions"} = $dimen;
-    if ($configuration_string eq "RGM_lAr") {
+    if ($configuration_string eq "rgm_fall2021_Ar") {
         $detector{"material"} = "lAr_target";
-    } elsif ($configuration_string eq "RGM_2_C_v2_S" or $configuration_string eq "RGM_2_C_v2_L") {
+    } elsif ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L") {
         $detector{"material"} = "G4_Galactic";
     }
     $detector{"style"} = 1;
@@ -1874,9 +1874,9 @@ sub build_rgm_targets {
     elsif ($configuration_string eq "rgm_fall2021_Ca") {
         build_RGM_Ca();
     }
-    elsif ($configuration_string eq "RGM_lAr" 
-        or $configuration_string eq "RGM_2_C_v2_S" 
-        or $configuration_string eq "RGM_2_C_v2_L") {
+    elsif ($configuration_string eq "rgm_fall2021_Ar" 
+        or $configuration_string eq "rgm_fall2021_C_v2_S" 
+        or $configuration_string eq "rgm_fall2021_C_v2_L") {
         build_new_rgm_targets($configuration_string);
     }
 
