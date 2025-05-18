@@ -4,6 +4,8 @@ use warnings;
 use lib ("../");
 use clas12_configuration_string;
 
+use Math::Trig;
+
 our %configuration;
 our %parameters;
 
@@ -1454,10 +1456,10 @@ sub build_new_rgm_targets {
     my @flag_shaft = (0.2665, 0.3175, 8.145, 0, 360, 0, 0, 0); #Inner radius, outer radius, half length, initial angle, final angle, x angle, y angle, z angle
 
     my (@Sn_flag_pole, @C_flag_pole, @Sn_flag, @C_flag, @Sn_target, @C_target, @flag_pole_relpos, @row);
-    my ($separation, $offset_x, $offset_y, $offset_z, $row_pole, $row_target, $row_flag, $sT_x2, $Sn_p_y);
+    my ($separation, $offset_x, $offset_y, $offset_z, $row_pole, $row_target, $row_flag, $Sn_p_x, $Sn_p_y);
     my ($C_p_x, $C_p_y, $Sn_t_x, $Sn_t_y, $C_t_x, $C_t_y, $Sn_f_x, $Sn_f_y, $C_f_x, $C_f_y);
 
-    # eparation = distance the flags set the target above the end of the flag poles.
+    # separation = distance the flags set the target above the end of the flag poles.
     # This distance is kept the same for small and large foils.
     $separation = 0.127;
 
@@ -1466,12 +1468,14 @@ sub build_new_rgm_targets {
 
     # In the following, we set the parameters for the foil target setup based on the blueprints of the system.
     # Here:
-    #       - Small foils: the same dimensions as the previous implementation (RGM_2_C)
-    #       - Large foils: dimensions are from the blueprints of the system, with the exception of the effective width. 
+    #       - Small foils (rgm_fall2021_C_v2_S): the same dimensions as the previous implementation, rgm_fall2021_C (RGM_2_C)
+    #       - Large foils (rgm_fall2021_C_v2_L): dimensions are from the blueprints of the system, with the exception of the effective width. 
     #                      The effective width is the width that a rectangular box would need to have—given the same thickness and height as the actual foil target—so that its total volume equals that of the irregularly shaped (octagonal) foil.
 
     if ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L")
     {
+        # Here we set the parameters for the foil target setup based on the rgm_fall2021_C (RGM_2_C) variation:
+
         # Flag Pole Geometry (cm/deg)
         @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 55, 0); #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
         @C_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 0, 0);   #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the C flag poles.
@@ -1504,13 +1508,6 @@ sub build_new_rgm_targets {
             @C_target = (0.243912, 0.455, 0.1, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         }
 
-        # # separation = distance the flags set the target above the end of the flag poles.
-        # # This distance is kept the same for small and large foils.
-        # $separation = 0.127; 
-
-        # @flag_pole_relpos = (0.381, 1.25, 1.25, 1.25); #Distance from end of flag_shaft to center of flag_pole 1, center of flag_pole 1 to center of flag_pole 2, center of flag_pole 2 to center of flag_pole 3, and center of flag_pole 3 to center of flag_pole 4
-        # @row = ($flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2] - $flag_pole_relpos[3], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1], $flag_shaft[2] - $flag_pole_relpos[0]); #Positions of rows of the flag_poles.
-
         # Offset to "zero" the center of the target.
         $offset_x = 0.0;
         $offset_y = -(2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation); # Set Y=0 to be center on target.
@@ -1526,7 +1523,7 @@ sub build_new_rgm_targets {
         $row_flag = ($row[3] + $offset_z - $Sn_flag_pole[1] + $Sn_flag[2]);
 
         # Sn Flag Pole position (cm).
-        $sT_x2 = -(0.81915 * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_x); # Cos(35) is the decimal out front.
+        $Sn_p_x = -(0.81915 * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_x); # Cos(35) is the decimal out front.
         $Sn_p_y = 0.57358 * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_y;   # Sin(35) is the decimal out front.
 
         # C Flag Pole positions (cm).
@@ -1550,7 +1547,9 @@ sub build_new_rgm_targets {
         $C_f_y = (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
 
     } elsif ($configuration_string eq "rgm_fall2021_Ar") {
-        
+        # Here we set the parameters for the lAr target setup.
+        # This time, the Sn and C foils are rotated to -30 deg and +30 deg, respectively.
+
         # Flag Pole Geometry (cm/deg)
         @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 30, 0); #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
         @C_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, -30, 0);   #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the C flag poles.
@@ -1563,12 +1562,11 @@ sub build_new_rgm_targets {
         @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -30); #Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         @C_target = (0.1685, 0.405, 0.1, 0, 0, 30);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
 
-        # # separation = distance the flags set the target above the end of the flag poles.
-        # # This distance is kept the same for small and large foils.
-        # $separation = 0.127;
+        my $Sn_rot_degrees = $Sn_target[5];
+        my $C_rot_degrees = $C_target[5];
 
-        # @flag_pole_relpos = (0.381, 1.25, 1.25, 1.25); #Distance from end of flag_shaft to center of flag_pole 1, center of flag_pole 1 to center of flag_pole 2, center of flag_pole 2 to center of flag_pole 3, and center of flag_pole 3 to center of flag_pole 4
-        # @row = ($flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2] - $flag_pole_relpos[3], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1], $flag_shaft[2] - $flag_pole_relpos[0]); #Positions of rows of the flag_poles.
+        my $Sn_rot_radians = deg2rad($Sn_rot_degrees); # Convert to radians
+        my $C_rot_radians = deg2rad($C_rot_degrees);   # Convert to radians
 
         # Offset to "zero" the center of the target.
         $offset_x = 0.0;
@@ -1585,28 +1583,40 @@ sub build_new_rgm_targets {
         $row_flag = ($row[3] + $offset_z - $Sn_flag_pole[1] + $Sn_flag[2]);
 
         # Sn Flag Pole position (cm).
-        $sT_x2 = -(0.689 + $offset_x); # 0.689 for rotation by 30deg
-        $Sn_p_y = -0.184652 + $C_flag_pole[2] + $flag_shaft[1] + $offset_y; # -0.184652 for rotation by 30deg
+        $Sn_p_x = sin($Sn_rot_radians) * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_x;  # Sin(-30) is the decimal out front.
+        $Sn_p_y = cos($Sn_rot_radians) * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_y; # Cos(-30) is the decimal out front.
+        # $Sn_p_x = -(0.689 + $offset_x); # 0.689 for rotation by 30deg
+        # $Sn_p_y = -0.184652 + $C_flag_pole[2] + $flag_shaft[1] + $offset_y; # -0.184652 for rotation by 30deg
 
         # C Flag Pole positions (cm).
-        $C_p_x = 0.689 + $offset_x; # 0.689 for rotation by 30deg
-        $C_p_y = -0.184652 + $C_flag_pole[2] + $flag_shaft[1] + $offset_y; # -0.184652 for rotation by 30deg
+        $C_p_x = sin($C_rot_radians) * ($C_flag_pole[2] + $flag_shaft[1]) + $offset_x; # Sin(30) is the decimal out front.
+        $C_p_y = cos($C_rot_radians) * ($C_flag_pole[2] + $flag_shaft[1]) + $offset_y; # Cos(30) is the decimal out front.
+        # $C_p_x = 0.689 + $offset_x; # 0.689 for rotation by 30deg
+        # $C_p_y = -0.184652 + $C_flag_pole[2] + $flag_shaft[1] + $offset_y; # -0.184652 for rotation by 30deg
 
         # Sn Targets positions (cm).
-        $Sn_t_x = -(1.48525 + $offset_x);
-        $Sn_t_y = -0.398047 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y;
+        $Sn_t_x = sin($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_x; # Sin(-30) is the decimal out front.
+        $Sn_t_y = cos($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y; # Cos(-30) is the decimal out front.
+        # $Sn_t_x = -(1.48525 + $offset_x);
+        # $Sn_t_y = -0.398047 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y;
 
         # C Targets positions (cm).
-        $C_t_x = 1.48525 + $offset_x;
-        $C_t_y = -0.398047 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y;
+        $C_t_x = sin($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_target[1] + $separation) + $offset_x; # Sin(30) is the decimal out front.
+        $C_t_y = cos($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_target[1] + $separation) + $offset_y; # Cos(30) is the decimal out front.
+        # $C_t_x = 1.48525 + $offset_x;
+        # $C_t_y = -0.398047 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y;
 
         # Sn Flag positions (cm).
-        $Sn_f_x = -(1.3145 + 0.0 + $offset_x);
-        $Sn_f_y = -0.352286 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
+        $Sn_f_x = sin($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_x; # Sin(-30) is the decimal out front.
+        $Sn_f_y = cos($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y; # Cos(-30) is the decimal out front.
+        # $Sn_f_x = -(1.3145 + 0.0 + $offset_x);
+        # $Sn_f_y = -0.352286 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
 
         # C Flag positions (cm).
-        $C_f_x = 1.3145 + 0.0 + $offset_x;
-        $C_f_y = -0.352286 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
+        $C_f_x = sin($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_flag[1]) + $offset_x; # Sin(30) is the decimal out front.
+        $C_f_y = cos($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_flag[1]) + $offset_y; # Cos(30) is the decimal out front.
+        # $C_f_x = 1.3145 + 0.0 + $offset_x;
+        # $C_f_y = -0.352286 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
     }
 
     # Mother Volume (parameters from RGM_2_C, RGM_2_Sn)
@@ -1660,7 +1670,7 @@ sub build_new_rgm_targets {
     $detector{"name"} = "Tin_flag_pole";
     $detector{"mother"} = "target";
     $detector{"description"} = "RGM Solid Target Flag Pole Sn";
-    $detector{"pos"} = "$sT_x2*cm $Sn_p_y*cm $row_pole*cm";
+    $detector{"pos"} = "$Sn_p_x*cm $Sn_p_y*cm $row_pole*cm";
     $detector{"rotation"} = "$Sn_flag_pole[5]*deg $Sn_flag_pole[6]*deg $Sn_flag_pole[7]*deg";
     $detector{"color"} = "990000";
     $detector{"type"} = "Tube";
