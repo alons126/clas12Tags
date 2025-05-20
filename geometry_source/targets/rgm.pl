@@ -1466,10 +1466,10 @@ sub build_new_rgm_targets {
     @flag_pole_relpos = (0.381, 1.25, 1.25, 1.25); #Distance from end of flag_shaft to center of flag_pole 1, center of flag_pole 1 to center of flag_pole 2, center of flag_pole 2 to center of flag_pole 3, and center of flag_pole 3 to center of flag_pole 4
     @row = ($flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2] - $flag_pole_relpos[3], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1] - $flag_pole_relpos[2], $flag_shaft[2] - $flag_pole_relpos[0] - $flag_pole_relpos[1], $flag_shaft[2] - $flag_pole_relpos[0]); #Positions of rows of the flag_poles.
 
-    # In the following, we set the parameters for the foil target setup based on the blueprints of the system.
+    # In the following, we set the parameters for the foil target setup based on the technical drawings of the system.
     # Here:
     #       - Small foils (rgm_fall2021_C_v2_S): the same dimensions as the previous implementation, rgm_fall2021_C (RGM_2_C)
-    #       - Large foils (rgm_fall2021_C_v2_L): dimensions are from the blueprints of the system, with the exception of the effective width. 
+    #       - Large foils (rgm_fall2021_C_v2_L): dimensions are from the technical drawings of the system, with the exception of the effective width. 
     #                      The effective width is the width that a rectangular box would need to have—given the same thickness and height as the actual foil target—so that its total volume equals that of the irregularly shaped (octagonal) foil.
 
     if ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L")
@@ -1482,27 +1482,27 @@ sub build_new_rgm_targets {
 
         if ($configuration_string eq "rgm_fall2021_C_v2_S") {
             # Flag Geometry (cm)
-            # Half x = width -> same as sketch (0.334/2 cm)
-            # Half y = hight -> same as sketch ((0.127+0.254)/2=0.381/2 cm)
-            # Half z = thickness -> same as sketch (0.071/2 cm)
+            # Half x = width -> same as in the technical drawing (0.334/2 cm)
+            # Half y = hight -> same as in the technical drawing ((0.127+0.254)/2=0.381/2 cm)
+            # Half z = thickness -> same as in the technical drawing (0.071/2 cm)
             @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
             @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
             # Targets Geometry (cm)
-            # Half y = hight -> same as sketch (0.405 cm)
+            # Half y = hight -> same as in the technical drawing (0.405 cm)
             # Half z = thickness -> same as analysis note (0.1 cm)
             @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
             @C_target = (0.1685, 0.405, 0.1, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         } elsif ($configuration_string eq "rgm_fall2021_C_v2_L") {
             # Flag Geometry (cm)
-            # Half x = width -> same as sketch (0.334/2 cm)
-            # Half y = hight -> same as sketch ((0.127+0.254)/2=0.381/2 cm)
-            # Half z = thickness -> same as sketch (0.071/2 cm)
+            # Half x = width -> same as in the technical drawing (0.334/2 cm)
+            # Half y = hight -> same as in the technical drawing ((0.127+0.254)/2=0.381/2 cm)
+            # Half z = thickness -> same as in the technical drawing (0.071/2 cm)
             @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
             @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
             # Targets Geometry (cm)
-            # Half y = hight -> same as sketch (0.455 cm)
+            # Half y = hight -> same as in the technical drawing (0.455 cm)
             # Half z = thickness -> same as analysis note (0.1 cm)
             @Sn_target = (0.243912, 0.455, 0.1, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
             @C_target = (0.243912, 0.455, 0.1, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
@@ -1623,6 +1623,8 @@ sub build_new_rgm_targets {
     my $nplanes = 4;
     my @oradius = (50.2, 50.2, 21.0, 21.0);
     my @z_plane = (-115.0, 265.0, 290.0, 300.0);
+    # my @oradius = (50.3, 50.3, 21.1, 21.1); # original (lD2)
+    # my @z_plane = (-140.0, 265.0, 280.0, 280.0); # original (lD2)
 
     # Vacuum target container
     my %detector = init_det();
