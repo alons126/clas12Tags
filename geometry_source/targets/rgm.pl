@@ -1477,35 +1477,25 @@ sub build_new_rgm_targets {
         # Here we set the parameters for the foil target setup based on the rgm_fall2021_C (RGM_2_C) variation:
 
         # Flag Pole Geometry (cm/deg)
-        @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 55, 0); #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
-        @C_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 0, 0);   #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the C flag poles.
+        @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 55, 0); # Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
+        @C_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 0, 0);   # Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the C flag poles.
 
         if ($configuration_string eq "rgm_fall2021_C_v2_S") {
             # Flag Geometry (cm)
-            # Half x = width -> same as in the technical drawing (0.334/2 cm)
-            # Half y = hight -> same as in the technical drawing ((0.127+0.254)/2=0.381/2 cm)
-            # Half z = thickness -> same as in the technical drawing (0.071/2 cm)
-            @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
-            @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
+            @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
+            @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
             # Targets Geometry (cm)
-            # Half y = hight -> same as in the technical drawing (0.405 cm)
-            # Half z = thickness -> same as analysis note (0.1 cm)
-            @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
-            @C_target = (0.1685, 0.405, 0.1, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @C_target = (0.1685, 0.405, 0.1, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         } elsif ($configuration_string eq "rgm_fall2021_C_v2_L") {
             # Flag Geometry (cm)
-            # Half x = width -> same as in the technical drawing (0.334/2 cm)
-            # Half y = hight -> same as in the technical drawing ((0.127+0.254)/2=0.381/2 cm)
-            # Half z = thickness -> same as in the technical drawing (0.071/2 cm)
-            @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
-            @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
+            @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
+            @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
             # Targets Geometry (cm)
-            # Half y = hight -> same as in the technical drawing (0.455 cm)
-            # Half z = thickness -> same as analysis note (0.1 cm)
-            @Sn_target = (0.243912, 0.455, 0.1, 0, 0, -55); #Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
-            @C_target = (0.243912, 0.455, 0.1, 0, 0, 0);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @Sn_target = (0.243912, 0.455, 0.1, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @C_target = (0.243912, 0.455, 0.1, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         }
 
         # Offset to "zero" the center of the target.
@@ -1524,7 +1514,7 @@ sub build_new_rgm_targets {
 
         # Sn Flag Pole position (cm).
         $Sn_p_x = -(0.81915 * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_x); # Cos(35) is the decimal out front.
-        $Sn_p_y = 0.57358 * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_y;   # Sin(35) is the decimal out front.
+        $Sn_p_y = 0.57358 * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_y;    # Sin(35) is the decimal out front.
 
         # C Flag Pole positions (cm).
         $C_p_x = 0.0 + $offset_x;
@@ -1551,16 +1541,16 @@ sub build_new_rgm_targets {
         # This time, the Sn and C foils are rotated to -30 deg and +30 deg, respectively.
 
         # Flag Pole Geometry (cm/deg)
-        @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 30, 0); #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
-        @C_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, -30, 0);   #Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the C flag poles.
+        @Sn_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, 30, 0); # Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the Sn flag poles.
+        @C_flag_pole = (0.084, 0.1195, 1.0605, 0, 360, 90, -30, 0); # Inner radius, outer radius, half length (outside of flag_shaft to end of flag_pole), initial angle, final angle, x angle, y angle, z angle for the C flag poles.
 
         # Flag Geometry (cm)
-        @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -30); #Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
-        @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 30);    #Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
+        @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -30); # Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
+        @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 30);   # Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
         # Targets Geometry (cm)
-        @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -30); #Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
-        @C_target = (0.1685, 0.405, 0.1, 0, 0, 30);    #Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+        @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -30); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+        @C_target = (0.1685, 0.405, 0.1, 0, 0, 30);   # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
 
         my $Sn_rot_degrees = $Sn_target[5];
         my $C_rot_degrees = $C_target[5];
@@ -1583,48 +1573,34 @@ sub build_new_rgm_targets {
         $row_flag = ($row[3] + $offset_z - $Sn_flag_pole[1] + $Sn_flag[2]);
 
         # Sn Flag Pole position (cm).
-        $Sn_p_x = sin($Sn_rot_radians) * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_x;  # Sin(-30) is the decimal out front.
+        $Sn_p_x = sin($Sn_rot_radians) * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_x; # Sin(-30) is the decimal out front.
         $Sn_p_y = cos($Sn_rot_radians) * ($Sn_flag_pole[2] + $flag_shaft[1]) + $offset_y; # Cos(-30) is the decimal out front.
-        # $Sn_p_x = -(0.689 + $offset_x); # 0.689 for rotation by 30deg
-        # $Sn_p_y = -0.184652 + $C_flag_pole[2] + $flag_shaft[1] + $offset_y; # -0.184652 for rotation by 30deg
 
         # C Flag Pole positions (cm).
         $C_p_x = sin($C_rot_radians) * ($C_flag_pole[2] + $flag_shaft[1]) + $offset_x; # Sin(30) is the decimal out front.
         $C_p_y = cos($C_rot_radians) * ($C_flag_pole[2] + $flag_shaft[1]) + $offset_y; # Cos(30) is the decimal out front.
-        # $C_p_x = 0.689 + $offset_x; # 0.689 for rotation by 30deg
-        # $C_p_y = -0.184652 + $C_flag_pole[2] + $flag_shaft[1] + $offset_y; # -0.184652 for rotation by 30deg
 
         # Sn Targets positions (cm).
         $Sn_t_x = sin($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_x; # Sin(-30) is the decimal out front.
         $Sn_t_y = cos($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y; # Cos(-30) is the decimal out front.
-        # $Sn_t_x = -(1.48525 + $offset_x);
-        # $Sn_t_y = -0.398047 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y;
 
         # C Targets positions (cm).
         $C_t_x = sin($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_target[1] + $separation) + $offset_x; # Sin(30) is the decimal out front.
         $C_t_y = cos($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_target[1] + $separation) + $offset_y; # Cos(30) is the decimal out front.
-        # $C_t_x = 1.48525 + $offset_x;
-        # $C_t_y = -0.398047 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_target[1] + $separation) + $offset_y;
 
         # Sn Flag positions (cm).
         $Sn_f_x = sin($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_x; # Sin(-30) is the decimal out front.
         $Sn_f_y = cos($Sn_rot_radians) * (2 * $Sn_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y; # Cos(-30) is the decimal out front.
-        # $Sn_f_x = -(1.3145 + 0.0 + $offset_x);
-        # $Sn_f_y = -0.352286 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
 
         # C Flag positions (cm).
         $C_f_x = sin($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_flag[1]) + $offset_x; # Sin(30) is the decimal out front.
         $C_f_y = cos($C_rot_radians) * (2 * $C_flag_pole[2] + $flag_shaft[1] + $C_flag[1]) + $offset_y; # Cos(30) is the decimal out front.
-        # $C_f_x = 1.3145 + 0.0 + $offset_x;
-        # $C_f_y = -0.352286 + (2 * $C_flag_pole[2] + $flag_shaft[1] + $Sn_flag[1]) + $offset_y;
     }
 
-    # Mother Volume (parameters from RGM_2_C, RGM_2_Sn)
+    # Mother Volume (parameters from lD2)
     my $nplanes = 4;
-    my @oradius = (50.2, 50.2, 21.0, 21.0);
-    my @z_plane = (-115.0, 265.0, 290.0, 300.0);
-    # my @oradius = (50.3, 50.3, 21.1, 21.1); # original (lD2)
-    # my @z_plane = (-140.0, 265.0, 280.0, 280.0); # original (lD2)
+    my @oradius = (50.3, 50.3, 21.1, 21.1);
+    my @z_plane = (-140.0, 265.0, 280.0, 280.0);
 
     # Vacuum target container
     my %detector = init_det();
@@ -1722,9 +1698,6 @@ sub build_new_rgm_targets {
     $detector{"style"} = 1;
     print_det(\%configuration, \%detector);
 
-    # TODO: remove lines
-    # print("\n\nrow_target:\t\t\t\t $row_target [cm]\n");
-
     # Tin foil target
     $detector{"name"} = "Tin_foil_target";
     $detector{"mother"} = "target";
@@ -1742,10 +1715,6 @@ sub build_new_rgm_targets {
     $nplanes = 5;
     my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5);             # With 0.1 mm spacing between the lAr and the windows
     my @z_planeT = (-27.37, -25.47, -25.0, -23.5, -22.63); # With 0.1 mm spacing between the lAr and the windows
-    # my @oradiusT = (2, 7.45, 7.425, 4.5, 1.5);             # Without spacing between the lAr and the windows
-    # my @z_planeT = (-27.47, -25.47, -25.0, -23.5, -22.53); # Without spacing between the lAr and the windows
-    # my @oradiusT = (3, 7.5);         # Before updating into clas12Tags
-    # my @z_planeT = (-27.47, -22.53); # Before updating into clas12Tags
 
     # Actual lAr target
     %detector = init_det();
@@ -1792,14 +1761,6 @@ sub build_new_rgm_targets {
     $detector{"style"} = "1";
     print_det(\%configuration, \%detector);
 
-    # # TODO: remove lines
-    # print("\n\nz pos al_window_entrance:                     \t\t$zpos [mm]\n");
-    # print("-((z pos al_window_entrance)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
-    # print("-((z pos al_window_entrance)-eng_shift-al_window_entrance_thickness):\t\t" . (-($zpos-$eng_shift-$al_window_entrance_thickness)) . " [mm]\n");
-    # # print("z pos al_window_entrance:\t\t" . ($zpos/10) . " [cm]\n");
-    # # print("z pos al_window_entrance-al_window_entrance_thickness:\t" . (($zpos-$al_window_entrance_thickness)/10) . " [cm]\n");
-    # print("\n");
-
     # Downstream Al window
     $al_window_exit_radius = 5; # From Bob (Exit window diameter is 15 mm) - used smaller radius to 5 mm to approximate the window as flat, similar to the lD2 target
     $al_window_exit_thickness = 0.015; # From Bob (Exit window al_window_exit_thickness is 30 microns)
@@ -1815,14 +1776,6 @@ sub build_new_rgm_targets {
     $detector{"material"} = "G4_Al";
     $detector{"style"} = "1";
     print_det(\%configuration, \%detector);
-
-    # # TODO: remove lines
-    # print("\n\nz pos al_window_exit:                     \t\t$zpos [mm]\n");
-    # print("-((z pos al_window_exit)-eng_shift):          \t\t" . (-($zpos-$eng_shift)) . " [mm]\n");
-    # print("-((z pos al_window_exit)-eng_shift+al_window_exit_thickness):\t\t" . (-($zpos-$eng_shift+$al_window_exit_thickness)) . " [mm]\n");
-    # # print("z pos al_window_exit:\t\t" . ($zpos/10) . " [cm]\n");
-    # # print("z pos al_window_exit-al_window_exit_thickness:\t" . (($zpos-$al_window_exit_thickness)/10) . " [cm]\n");
-    # print("\n");
 
     # Scattering chambers al window, 75 microns
     # Note: the eng. position is 1017.27 - here it is placed 8mm upstream to place it within the mother scattering chamber
