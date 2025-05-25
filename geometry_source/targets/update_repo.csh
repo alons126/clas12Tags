@@ -1,9 +1,9 @@
 #!/bin/tcsh
 
 # To run: 
-# chmod +x /lustre24/expphy/volatile/clas12/asportes/clas12Tags/refresh_GEMC_target.csh ; /lustre24/expphy/volatile/clas12/asportes/clas12Tags/refresh_GEMC_target.csh
+# chmod +x /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags/refresh_GEMC_target.csh ; /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags/refresh_GEMC_target.csh
 
-cd /lustre24/expphy/volatile/clas12/asportes/clas12Tags/geometry_source/targets
+cd /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags/geometry_source/targets
 
 echo ""
 echo "${COLOR_START}==================================================================================================${COLOR_END}"

@@ -1,7 +1,7 @@
 #!/bin/tcsh
 
 unset CLAS12TAGS_DIR
-setenv CLAS12TAGS_DIR /lustre24/expphy/volatile/clas12/asportes/clas12Tags
+setenv CLAS12TAGS_DIR /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags
 
 unset TARGETS_DIR
 setenv TARGETS_DIR ${CLAS12TAGS_DIR}/experiments/clas12/targets
