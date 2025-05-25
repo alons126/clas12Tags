@@ -4,10 +4,11 @@ unset CLAS12TAGS_DIR
 setenv CLAS12TAGS_DIR /lustre24/expphy/volatile/clas12/asportes/clas12Tags
 
 unset TARGETS_DIR
-setenv TARGETS_DIR ${CLAS12TAGS_DIR}/geometry_source/targets
+setenv TARGETS_DIR ${CLAS12TAGS_DIR}/experiments/clas12/targets
+# setenv TARGETS_DIR ${CLAS12TAGS_DIR}/geometry_source/targets
 
 unset GCARD_TO_RUN
-setenv GCARD_TO_RUN ${TARGETS_DIR}/target_text_rga_spring2018.gcard
+setenv GCARD_TO_RUN ${TARGETS_DIR}/target_text_rgm_fall2021_C.gcard
 # setenv GCARD_TO_RUN ${TARGETS_DIR}/target_text_rgm_fall2021_C.gcard
 # setenv GCARD_TO_RUN ${TARGETS_DIR}/target_text_rgm_fall2021_Ar.gcard
 
