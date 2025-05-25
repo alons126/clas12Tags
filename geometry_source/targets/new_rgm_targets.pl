@@ -14,7 +14,7 @@ sub build_lAr_mats {
     my %mat = init_mat();
     $mat{"name"}          = "lAr_target";
     $mat{"description"}   = "lAr target 1.396 g/cm3";
-    $mat{"density"}       = "1.396";  # 698.00/0.5=1396 mg/cm3
+    $mat{"density"}       = "1.396";
     $mat{"ncomponents"}   = "1";
     $mat{"components"}    = "G4_Ar 1";
     print_mat(\%configuration, \%mat);

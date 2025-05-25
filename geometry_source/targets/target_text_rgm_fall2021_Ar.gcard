@@ -5,7 +5,8 @@
 
     <!-- The new lAr RGM target -->
 	<detector name="target" factory="TEXT" variation="rgm_fall2021_Ar"/>
-	<detector name="cad_rgm_new/" factory="CAD"/>
+	<detector name="geometry_source/targets/cad_rgm_new/" factory="CAD"/>
+	<!-- <detector name="cad_rgm_new/" factory="CAD"/> -->
 
     <!-- The new small C RGM target -->
 	<!-- <detector name="target" factory="TEXT" variation="rgm_fall2021_C_v2_S"/>
