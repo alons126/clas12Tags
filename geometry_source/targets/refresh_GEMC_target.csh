@@ -1,5 +1,15 @@
 #!/bin/tcsh
 
+unset CLAS12TAGS_DIR
+setenv CLAS12TAGS_DIR /lustre24/expphy/volatile/clas12/asportes/clas12Tags
+
+unset TARGETS_DIR
+setenv TARGETS_DIR ${CLAS12TAGS_DIR}/geometry_source/targets
+
+unset GCARD_TO_RUN
+setenv GCARD_TO_RUN ${TARGETS_DIR}/target_text_rgm_fall2021_C.gcard
+# setenv GCARD_TO_RUN ${TARGETS_DIR}/target_text_rgm_fall2021_Ar.gcard
+
 echo "${COLOR_START}= switching into gemc/dev module =================================================================${COLOR_END}"
 echo ""
 module switch gemc/dev
