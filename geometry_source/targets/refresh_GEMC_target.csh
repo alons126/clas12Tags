@@ -1,5 +1,8 @@
 #!/bin/tcsh
 
+# To run: 
+# source /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags/geometry_source/targets/update_and_refresh_target.csh
+
 echo "${COLOR_START}= switching into gemc/dev module =================================================================${COLOR_END}"
 echo ""
 module switch gemc/dev

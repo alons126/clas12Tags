@@ -1,5 +1,8 @@
 #!/bin/tcsh
 
+# To run: 
+# source /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags/geometry_source/targets/update_and_refresh_target.csh
+
 unset CLAS12TAGS_DIR
 setenv CLAS12TAGS_DIR /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags
 

@@ -1,5 +1,8 @@
 #!/bin/tcsh
 
+# To run: 
+# source /lustre24/expphy/volatile/clas12/asportes/Ar40_imp_GEMC/clas12Tags/geometry_source/targets/update_and_refresh_target.csh
+
 source set_env.csh
 source update_repo.csh
 source refresh_GEMC_target.csh
