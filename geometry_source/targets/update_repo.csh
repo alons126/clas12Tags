@@ -5,16 +5,6 @@
 
 cd /lustre24/expphy/volatile/clas12/asportes/clas12Tags/geometry_source/targets
 
-if (! $?COLOR_START) then
-    unset COLOR_START
-    setenv COLOR_START "\033[35m"
-endif
-
-if (! $?COLOR_END) then
-    unset COLOR_END
-    setenv COLOR_END "\033[0m"
-endif
-
 echo ""
 echo "${COLOR_START}==================================================================================================${COLOR_END}"
 echo "${COLOR_START}= Running GEMC target display script                                                             =${COLOR_END}"
