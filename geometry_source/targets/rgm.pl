@@ -1746,8 +1746,8 @@ sub build_new_rgm_targets {
     print_det(\%configuration, \%detector);
 
     # Upstream Al window. zpos comes from engineering model, has the shift of 1273.27 mm +  30 mm due to the new engineering center
-    my $eng_shift = 1273.27; # original
-    # my $eng_shift = 1303.27; # original
+    # my $eng_shift = 1273.27; # original
+    my $eng_shift = 1303.27; # original
     my $al_window_entrance_radius = 2.95; # From Bob (Entrance window diameter is 6 mm) - used smaller radius to 2.95 mm to approximate the window as flat and avoid overlap with the base tube, similar to the lD2 target
     my $al_window_entrance_thickness = 0.015; # From Bob (Entrance window thickness is 30 microns)
     my $zpos = $eng_shift - 1330.77 + $al_window_entrance_thickness; # From BM2101-02-00-0000 (8).pdf
