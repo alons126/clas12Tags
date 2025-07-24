@@ -1486,16 +1486,16 @@ sub build_new_rgm_targets {
             @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
             # Targets Geometry (cm)
-            @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
-            @C_target = (0.1685, 0.405, 0.1, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @Sn_target = (0.175, 0.405, 0.1, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @C_target = (0.175, 0.405, 0.1, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         } elsif ($configuration_string eq "rgm_fall2021_C_v2_L") {
             # Flag Geometry (cm)
             @Sn_flag = (0.167, 0.1905, 0.0355, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn flag that holds the target foils.
             @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
             # Targets Geometry (cm)
-            @Sn_target = (0.244, 0.455, 0.1, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
-            @C_target = (0.244, 0.455, 0.1, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @Sn_target = (0.245, 0.455, 0.1, 0, 0, -55); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+            @C_target = (0.245, 0.455, 0.1, 0, 0, 0);    # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
         }
 
         # Offset to "zero" the center of the target.
@@ -1549,8 +1549,8 @@ sub build_new_rgm_targets {
         @C_flag = (0.167, 0.1905, 0.0355, 0, 0, 30);   # Half x, y, z dimensions and x, y, z angles for the C flag that holds the target foils.
 
         # Targets Geometry (cm)
-        @Sn_target = (0.1685, 0.405, 0.1, 0, 0, -30); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
-        @C_target = (0.1685, 0.405, 0.1, 0, 0, 30);   # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+        @Sn_target = (0.175, 0.405, 0.1, 0, 0, -30); # Half x, y, z dimensions and x, y, z angles for the Sn target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
+        @C_target = (0.175, 0.405, 0.1, 0, 0, 30);   # Half x, y, z dimensions and x, y, z angles for the C target foils. I did a lot of geometry to try and keep the thickness & over all volume the same as in the CAD file.
 
         my $Sn_rot_degrees = $Sn_target[5];
         my $C_rot_degrees = $C_target[5];
