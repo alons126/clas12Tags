@@ -1472,8 +1472,7 @@ sub build_new_rgm_targets {
     #       - Large foils (rgm_fall2021_C_v2_L): dimensions are from the technical drawings of the system, with the exception of the effective width. 
     #                      The effective width is the width that a rectangular box would need to have—given the same thickness and height as the actual foil target—so that its total volume equals that of the irregularly shaped (octagonal) foil.
 
-    if ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L")
-    {
+    if ($configuration_string eq "rgm_fall2021_C_v2_S" or $configuration_string eq "rgm_fall2021_C_v2_L") {
         # Here we set the parameters for the foil target setup based on the rgm_fall2021_C (RGM_2_C) variation:
 
         # Flag Pole Geometry (cm/deg)
