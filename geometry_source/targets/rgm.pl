@@ -1721,14 +1721,7 @@ sub build_rgm_targets {
 
     my $configuration_string = clas12_configuration_string(\%configuration);
 
-<<<<<<< HEAD
-    if ($configuration_string eq "rgm_fall2021_Sn") {
-        build_RGM_2_Sn();
-    }
-    elsif ($configuration_string eq "rgm_fall2021_Cx4") {
-=======
     if ($configuration_string eq "rgm_fall2021_Cx4") {
->>>>>>> da73b3a3a35fa7a8874d3a8fa64138a16e856f64
         build_RGM_8_C_L();
     }
     elsif ($configuration_string eq "rgm_fall2021_Snx4") {
